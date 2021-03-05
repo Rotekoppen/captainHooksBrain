@@ -24,7 +24,7 @@ client.registry
 
 
 client.setProvider(
-  sqlite.open({ filename: "database.db", driver: sqlite3.Database }).then(db => new Commando.SQLiteProvider(db))
+  sqlite.open({ filename: "../database.db", driver: sqlite3.Database }).then(db => new Commando.SQLiteProvider(db))
 ).catch(console.error);
 
 client.on("ready", () => {
