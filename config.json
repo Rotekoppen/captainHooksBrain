@@ -1,0 +1,13 @@
+{
+  "owner": "164420487441547264",
+  "prefix": "c!",
+  "invite": "https://discord.gg/hwF3gzqGC3",
+  "disableEveryone": true,
+  "groups": [
+    ["images", "Image commands"],
+    ["reddit", "Reddit commands"],
+    ["pfpfun", "Profile picture fun"],
+    ["other", "Other commands"],
+    ["radio", "Radio commands"]
+  ]
+}
