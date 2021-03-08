@@ -22,6 +22,7 @@
   "_moduleAliases": {
     "@root"      : ".",
     "@resources" : "./resources",
-    "@util"      : "./util"
+    "@util"      : "./util",
+    "@storage"   : "./storage"
   }
 }

@@ -3,7 +3,7 @@ const { createCanvas, loadImage } = require('canvas')
 const { MessageAttachment } = require("discord.js");
 
 
-module.exports = class chartCommand extends Command {
+module.exports = class communismCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: "communism",
