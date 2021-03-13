@@ -5,7 +5,7 @@ const { MessageEmbed } = require("discord.js");
 const dogcatapi = require("@util/dogcatapi.js");
 const { CAT_API_KEY } = require("@root/../tokens.json");;
 
-module.exports = class CatCommand extends Command {
+module.exports = class catCommand extends Command {
   constructor(client) {
     super(client, {
       name: "cat",
@@ -17,8 +17,8 @@ module.exports = class CatCommand extends Command {
   }
 
   async run(message, args) {
-    message.channel.startTyping();
     try {
+      message.channel.startTyping();
       var images = await dogcatapi.getRandom("cat", CAT_API_KEY, message.author.username);
 
       var image = images[0];

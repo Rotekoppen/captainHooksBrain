@@ -7,8 +7,9 @@
     ["images", "Image commands"],
     ["reddit", "Reddit commands"],
     ["pfpfun", "Profile picture fun"],
-    ["other", "Other commands"],
-    ["radio", "Radio commands"]
+    ["games", "Games commands"],
+    ["fun", "Fun commands"],
+    ["other", "Other commands"]
   ],
   "blockWidth": 20
 }

@@ -1,7 +1,7 @@
 const { Command } = require("discord.js-commando");
 const reddit = require("@util/reddit.js");
 
-module.exports = class DankCommand extends Command {
+module.exports = class memeCommand extends Command {
   constructor(client) {
     super(client, {
       name: "meme",

@@ -5,7 +5,7 @@ const { MessageEmbed } = require("discord.js");
 const dogcatapi = require("@util/dogcatapi.js");
 const { DOG_API_KEY } = require("@root/../tokens.json");;
 
-module.exports = class DogCommand extends Command {
+module.exports = class dogCommand extends Command {
   constructor(client) {
     super(client, {
       name: "dog",

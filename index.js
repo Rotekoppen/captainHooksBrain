@@ -34,7 +34,14 @@ client.on("ready", () => {
 });
 
 client.on("message", async msg => {
-  console.log(msg.content);
+  if (msg.channel.id == "819183218107875388") {
+    if (msg.content != "hei") {
+      msg.delete()
+    }
+  }
+  //console.log(msg.content);
 });
 
-client.login(tokens.discord);
+client.login(tokens.utilToken);
+
+client.yatzy = {}
