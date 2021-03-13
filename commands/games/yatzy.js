@@ -21,14 +21,14 @@ module.exports = class yatzyCommand extends Command {
       		prompt: "What kind of yatzy game to play. (mini/normal/maxi)",
       		type: "string",
           default: "mini",
-          oneOf: ["mini", "normal", "maxi"],
+          oneOf: ["mini"/*, "normal", "maxi"*/],
       	},
       	{
       		key: "forced",
       		prompt: "If the game is forced order, or free order. (forced/free)",
       		type: "string",
           default: "forced",
-          oneOf: ["forced", "free"],
+          oneOf: ["forced"/*, "free"*/],
       	},
       ]
     });
@@ -40,7 +40,7 @@ module.exports = class yatzyCommand extends Command {
     }else {
       this.client.yatzy[message.guild.id] = new yatzy(message.guild, message.channel, gameType, forced == "forced")
       this.client.yatzy[message.guild.id].addPlayer(displayName, message.author, true)
-      return message.reply("Started a game of yatzy, with you as the host. Other players use c!yjoin to join. When all players has joined use c!ystart to start the game.")
+      return message.reply("Started a game of yatzy, with you as the host. Other players use `yjoin` to join. When all players has joined use `ystart` to start the game.")
     }
   }
 }

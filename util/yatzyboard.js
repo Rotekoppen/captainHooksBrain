@@ -25,42 +25,6 @@ const board = {
 //    "Chance",
 //    "Yatzy",
     "Total",
-  ],
-  currentCategory: 3,
-  currentPlayer: 3,
-  players: [
-    {
-      displayName: "A",
-      scores: [" ", " ", " ", " ", " ", " ", " "]
-    },
-    {
-      displayName: "B",
-      scores: [" ", " ", " ", " ", " ", " ", " "]
-    },
-    {
-      displayName: "C",
-      scores: [" ", " ", " ", " ", " ", " ", " "]
-    },
-    {
-      displayName: "D",
-      scores: [" ", " ", " ", " ", " ", " ", " "]
-    },
-//    {
-//      displayName: "E",
-//      scores: [0, 0, 0, 0, 0, 0, 0]
-//    },
-//    {
-//      displayName: "F",
-//      scores: [0, 0, 0, 0, 0, 0, 0]
-//    },
-//    {
-//      displayName: "G",
-//      scores: [0, 0, 0, 0, 0, 0, 0]
-//    },
-//    {
-//      displayName: "H",
-//      scores: [0, 0, 0, 0, 0, 0, 0]
-//    }
   ]
 }
 
@@ -123,26 +87,26 @@ exports.generate = async function (board) {
   });
 
   board.categories.forEach((category, c) => {
-    if (category == "Sum" || category == "Total") {
-      html += "<tr><td class=\"sum side\">" + category + "</td>"
+    if (category == "sum" || category == "total") {
+      html += "<tr><td class=\"sum side\">" + board.catalogue[category].display + "</td>"
       board.players.forEach((player, p) => {
         html += "<td class=\"sum\">" + player.scores[c] + "</td>"
       });
 
-    }else if (category == "Bonus" || category == "Yatzy"){
-      html += "<tr><td class=\"side bonus\">" + category + "</td>"
+    }else if (category == "bonus" || category == "yatzy"){
+      html += "<tr><td class=\"side bonus\">" + board.catalogue[category].display + "</td>"
       board.players.forEach((player, p) => {
         html += "<td class=\"bonus\">" + player.scores[c] + "</td>"
       });
 
     }else {
       if (board.currentCategory == c) {
-        html += "<tr><td class=\"red side\">" + category + "</td>"
+        html += "<tr><td class=\"red side\">" + board.catalogue[category].display + "</td>"
         board.players.forEach((player, p) => {
           html += "<td class=\"red\">" + player.scores[c] + "</td>"
         });
       }else {
-        html += "<tr><td class=\"side\">" + category + "</td>"
+        html += "<tr><td class=\"side\">" + board.catalogue[category].display + "</td>"
         board.players.forEach((player, p) => {
           html += "<td>" + player.scores[c] + "</td>"
         });

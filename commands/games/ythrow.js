@@ -17,7 +17,7 @@ module.exports = class ythrowCommand extends Command {
     if (this.client.yatzy[message.guild.id]) {
       if (this.client.yatzy[message.guild.id].started) {
         if (this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].user.id == message.author.id) {
-          return message.reply("Not yet implemented.")
+          this.client.yatzy[message.guild.id].throwDie(this.client.yatzy[message.guild.id].currentPlayer)
         }else {
           return message.reply("It is not your turn.")
         }
