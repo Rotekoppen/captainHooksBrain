@@ -1,33 +1,5 @@
 const nodeHtmlToImage = require('node-html-to-image')
 
-const board = {
-  categories: [
-    "Ones",
-    "Twos",
-    "Threes",
-    "Fours",
-    "Fives",
-    "Sixes",
-//    "Sum",
-//    "Bonus",
-//    "1 pair",
-//    "2 pairs",
-//    "3 pairs",
-//    "3 Alike",
-//    "4 Alike",
-//    "5 Alike",
-//    "Small Str.",
-//    "Large Str.",
-//    "Full Str.",
-//    "Hut",
-//    "House",
-//    "Tower",
-//    "Chance",
-//    "Yatzy",
-    "Total",
-  ]
-}
-
 exports.generate = async function (board) {
 
   let html = `<!DOCTYPE html>

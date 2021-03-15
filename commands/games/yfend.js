@@ -1,6 +1,4 @@
 const { Command } = require("discord.js-commando");
-const yatzy = require("@util/yatzy.js");
-
 module.exports = class yfendCommand extends Command {
   constructor(client) {
     super(client, {
@@ -14,11 +12,11 @@ module.exports = class yfendCommand extends Command {
   }
 
   async run(message) {
-    if (this.client.yatzy[message.guild.id]) {
-      this.client.yatzy[message.guild.id] = undefined
-      return message.reply("Ended ongoing game.")
-    }else {
+    if (!this.client.yatzy[message.guild.id]) {
       return message.reply("There is no ongoing game.")
     }
+
+    this.client.yatzy[message.guild.id] = undefined
+    return message.reply("Ended ongoing game.")
   }
 }

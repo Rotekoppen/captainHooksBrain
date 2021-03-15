@@ -28,7 +28,9 @@ module.exports = class userinfoCommand extends Command {
     	.addFields(
     		{ name: 'Created:', value: target.createdAt.toGMTString()},
     	)
-
+    if (target.id == "770288490205675560") {
+      embed.setTitle(target.username + " <3")
+    }
     return message.channel.send(embed)
   }
 }

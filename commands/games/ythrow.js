@@ -1,6 +1,4 @@
 const { Command } = require("discord.js-commando");
-const yatzy = require("@util/yatzy.js");
-
 module.exports = class ythrowCommand extends Command {
   constructor(client) {
     super(client, {
@@ -14,18 +12,21 @@ module.exports = class ythrowCommand extends Command {
   }
 
   async run(message, { displayName }) {
-    if (this.client.yatzy[message.guild.id]) {
-      if (this.client.yatzy[message.guild.id].started) {
-        if (this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].user.id == message.author.id) {
-          this.client.yatzy[message.guild.id].throwDie(this.client.yatzy[message.guild.id].currentPlayer)
-        }else {
-          return message.reply("It is not your turn.")
-        }
-      }else {
-        return message.reply("The game has not started.")
-      }
-    }else {
+    if (!this.client.yatzy[message.guild.id]) {
       return message.reply("There is no ongoing game.")
     }
+    if (this.client.yatzy[message.guild.id].ended) {
+      return message.reply("There is no ongoing game.")
+    }
+    if (!this.client.yatzy[message.guild.id].started) {
+      return message.reply("The game has not started.")
+    }
+    if (!this.client.yatzy[message.guild.id].async) {
+      if (this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].user.id != message.author.id) {
+        return message.reply("It is not your turn.")
+      }
+    }
+
+    this.client.yatzy[message.guild.id].throwDie(this.client.yatzy[message.guild.id].currentPlayer)
   }
 }

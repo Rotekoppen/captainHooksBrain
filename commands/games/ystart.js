@@ -1,6 +1,4 @@
 const { Command } = require("discord.js-commando");
-const yatzy = require("@util/yatzy.js");
-
 module.exports = class ystartCommand extends Command {
   constructor(client) {
     super(client, {
@@ -13,16 +11,21 @@ module.exports = class ystartCommand extends Command {
   }
 
   async run(message) {
-    if (this.client.yatzy[message.guild.id]) {
-      if (this.client.yatzy[message.guild.id].host.id == message.author.id) {
-        let reply = message.reply("Starting game.")
-        this.client.yatzy[message.guild.id].startGame()
-        return reply
-      }else {
-        return message.reply("You are not the host of that game.")
-      }
-    }else {
+    if (!this.client.yatzy[message.guild.id]) {
       return message.reply("There is no ongoing game.")
     }
+    if (this.client.yatzy[message.guild.id].ended) {
+      return message.reply("There is no ongoing game.")
+    }
+    if (this.client.yatzy[message.guild.id].host.id != message.author.id) {
+      return message.reply("You are not the host of that game.")
+    }
+    if (this.client.yatzy[message.guild.id].started) {
+      return message.reply("The game has already been started.")
+    }
+
+    let reply = message.reply("Starting game.")
+    this.client.yatzy[message.guild.id].startGame()
+    return reply
   }
 }

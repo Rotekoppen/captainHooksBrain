@@ -14,14 +14,13 @@ module.exports = class yatzyCommand extends Command {
       		key: "displayName",
       		prompt: "What character will represent you on the board. (max 2 characters)",
       		type: "string",
-          validate: text => /^[A-Za-zøæåØÆÅ]{1,2}$/.test(text)
+          validate: text => /^[a-zøæå\d]{1,2}$/gi.test(text)
       	},
       	{
       		key: "gameType",
-      		prompt: "What kind of yatzy game to play. (mini/normal/maxi)",
+      		prompt: "What kind of yatzy game to play. (mini/normal/maxi/random/maxirandom/chance/yatzy)",
       		type: "string",
-          default: "mini",
-          oneOf: ["mini"/*, "normal", "maxi"*/],
+          oneOf: ["mini", "normal", "maxi", "random", "maxirandom", "chance", "yatzy"],
       	},
       	{
       		key: "forced",
@@ -36,11 +35,12 @@ module.exports = class yatzyCommand extends Command {
 
   async run(message, { displayName, gameType, forced }) {
     if (this.client.yatzy[message.guild.id]) {
-      return message.reply("There is already a game of yatzy started on this server.")
-    }else {
-      this.client.yatzy[message.guild.id] = new yatzy(message.guild, message.channel, gameType, forced == "forced")
-      this.client.yatzy[message.guild.id].addPlayer(displayName, message.author, true)
-      return message.reply("Started a game of yatzy, with you as the host. Other players use `yjoin` to join. When all players has joined use `ystart` to start the game.")
+      if (!this.client.yatzy[message.guild.id].ended) {
+        return message.reply("There is already a game of yatzy started on this server.")
+      }
     }
+    this.client.yatzy[message.guild.id] = new yatzy(message.guild, message.channel, gameType.toLowerCase(), forced.toLowerCase() == "forced")
+    this.client.yatzy[message.guild.id].addPlayer(displayName, message.author, true)
+    return message.reply("Started a game of yatzy, with you as the host. Other players use `yjoin` to join. When all players has joined use `ystart` to start the game.")
   }
 }
