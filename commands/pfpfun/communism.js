@@ -20,7 +20,7 @@ module.exports = class communismCommand extends Command {
 		});
 	}
 
-	run = async function(message, { target }) {
+	run = async (message, { target }) => {
     const avatarURL = target.displayAvatarURL({ format: "png" })
     if (avatarURL == null) return message.reply("the avatar could not be fetched")
 		const sickle = await loadImage("resources/communism.png")
