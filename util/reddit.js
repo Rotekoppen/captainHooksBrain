@@ -1,12 +1,12 @@
 const { MessageEmbed } = require("discord.js");
-const snekfetch = require("snekfetch");
+const fetch = require('node-fetch');
 
 exports.fetch = async function (subreddit, message) {
   message.channel.startTyping();
 
-  const { body } = await snekfetch
-      .get("https://www.reddit.com/r/" + subreddit + ".json?sort=top&t=week")
-      .query({ limit: 800 });
+  const body = await fetch("https://www.reddit.com/r/" + subreddit + ".json?sort=top&t=week")
+    .then(res => res.json())
+
 
   const allowed = message.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
 
