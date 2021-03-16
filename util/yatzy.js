@@ -582,6 +582,27 @@ module.exports = function (guild, channel, gameType, forced) {
     this.dieCount = 5
   }
 
+  if (gameType == "minirandom") {
+    const selection = [
+      "ones", "twos", "threes",
+      "fours", "fives", "sixes",
+
+      "1pair", "2pairs",
+      "3alike", "4alike",
+
+      "sstraight", "lstraight",
+
+      "house",
+
+      "chance", "yatzy",
+    ]
+
+    for (var i = 0; i < 6; i++) {
+      categories.push(selection[Math.floor(Math.random() * selection.length)])
+    }
+    this.dieCount = 5
+  }
+
   if (gameType == "maxirandom") {
     const selection = [
       "ones", "twos", "threes",

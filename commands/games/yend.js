@@ -12,14 +12,15 @@ module.exports = class yendCommand extends Command {
   }
 
   async run(message) {
-    if (!this.client.yatzy[message.guild.id]) {
+    if (!this.client.yatzy[message.channel.id]) {
       return message.reply("There is no ongoing game.")
     }
-    if (this.client.yatzy[message.guild.id].hostid != message.author.id) {
+
+    if (this.client.yatzy[message.channel.id].hostid != message.author.id) {
       return message.reply("You are not the host of that game.")
     }
 
-    this.client.yatzy[message.guild.id] = undefined
+    this.client.yatzy[message.channel.id] = undefined
     return message.reply("Ended ongoing game.")
   }
 }

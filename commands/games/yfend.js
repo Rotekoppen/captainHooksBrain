@@ -12,11 +12,11 @@ module.exports = class yfendCommand extends Command {
   }
 
   async run(message) {
-    if (!this.client.yatzy[message.guild.id]) {
+    if (!this.client.yatzy[message.channel.id]) {
       return message.reply("There is no ongoing game.")
     }
 
-    this.client.yatzy[message.guild.id] = undefined
+    this.client.yatzy[message.channel.id] = undefined
     return message.reply("Ended ongoing game.")
   }
 }

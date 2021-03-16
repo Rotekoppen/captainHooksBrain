@@ -11,21 +11,21 @@ module.exports = class ystartCommand extends Command {
   }
 
   async run(message) {
-    if (!this.client.yatzy[message.guild.id]) {
+    if (!this.client.yatzy[message.channel.id]) {
       return message.reply("There is no ongoing game.")
     }
-    if (this.client.yatzy[message.guild.id].ended) {
+    if (this.client.yatzy[message.channel.id].ended) {
       return message.reply("There is no ongoing game.")
     }
-    if (this.client.yatzy[message.guild.id].host.id != message.author.id) {
+    if (this.client.yatzy[message.channel.id].host.id != message.author.id) {
       return message.reply("You are not the host of that game.")
     }
-    if (this.client.yatzy[message.guild.id].started) {
+    if (this.client.yatzy[message.channel.id].started) {
       return message.reply("The game has already been started.")
     }
 
     let reply = message.reply("Starting game.")
-    this.client.yatzy[message.guild.id].startGame()
+    this.client.yatzy[message.channel.id].startGame()
     return reply
   }
 }

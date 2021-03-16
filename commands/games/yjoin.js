@@ -20,19 +20,20 @@ module.exports = class yjoinCommand extends Command {
   }
 
   async run(message, { displayName }) {
-    if (!this.client.yatzy[message.guild.id]) {
+    if (!this.client.yatzy[message.channel.id]) {
       return message.reply("There is no ongoing game.")
     }
-    if (this.client.yatzy[message.guild.id].ended) {
+    let game = this.client.yatzy[message.channel.id]
+    if (game.ended) {
       return message.reply("There is no ongoing game.")
     }
-    if (this.client.yatzy[message.guild.id].started) {
+    if (game.started) {
       return message.reply("The game has started.")
     }
-    if (this.client.yatzy[message.guild.id].players.length >= 8) {
+    if (game.players.length >= 8) {
       return message.reply("The game is full.")
     }
-    this.client.yatzy[message.guild.id].addPlayer(displayName, message.author)
+    game.addPlayer(displayName, message.author)
     return message.reply("Joined the game.")
   }
 }

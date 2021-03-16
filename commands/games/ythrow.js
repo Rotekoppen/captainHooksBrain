@@ -12,21 +12,21 @@ module.exports = class ythrowCommand extends Command {
   }
 
   async run(message, { displayName }) {
-    if (!this.client.yatzy[message.guild.id]) {
+    if (!this.client.yatzy[message.channel.id]) {
       return message.reply("There is no ongoing game.")
-    }
-    if (this.client.yatzy[message.guild.id].ended) {
-      return message.reply("There is no ongoing game.")
-    }
-    if (!this.client.yatzy[message.guild.id].started) {
-      return message.reply("The game has not started.")
-    }
-    if (!this.client.yatzy[message.guild.id].async) {
-      if (this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].user.id != message.author.id) {
-        return message.reply("It is not your turn.")
-      }
     }
 
-    this.client.yatzy[message.guild.id].throwDie(this.client.yatzy[message.guild.id].currentPlayer)
+    let game = this.client.yatzy[message.channel.id]
+    if (game.ended) {
+      return message.reply("There is no ongoing game.")
+    }
+    if (!game.started) {
+      return message.reply("The game has not started.")
+    }
+    if (game.players[game.currentPlayer].user.id != message.author.id) {
+      return message.reply("It is not your turn.")
+    }
+
+    game.throwDie(game.currentPlayer)
   }
 }

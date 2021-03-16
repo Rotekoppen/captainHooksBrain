@@ -11,7 +11,7 @@ module.exports = class ykeepCommand extends Command {
       args: [
       	{
       		key: "keeping",
-      		prompt: "What die to keep. Enter the number of the dice, not the number on the dice. Example (1 (to keep the first dice), 135(to keep first, third and fifth die), all, none)",
+      		prompt: "What die to keep. Enter the number of the dice, not the number on the dice. Example (1 (to keep the first dice), 135  (to keep first, third and fifth die), 0 (to keep none))",
       		type: "string",
           validate: text => /^([\d ]{1,}|all|none)$/gi.test(text)
       	},
@@ -20,32 +20,20 @@ module.exports = class ykeepCommand extends Command {
   }
 
   async run(message, { keeping }) {
-    if (!this.client.yatzy[message.guild.id]) {
+    if (!this.client.yatzy[message.channel.id]) {
       return message.reply("There is no ongoing game.")
     }
-    if (this.client.yatzy[message.guild.id].ended) {
+
+    let game = this.client.yatzy[message.channel.id]
+
+    if (game.ended) {
       return message.reply("There is no ongoing game.")
     }
-    if (!this.client.yatzy[message.guild.id].started) {
+    if (!game.started) {
       return message.reply("The game has not started.")
     }
-    if (!this.client.yatzy[message.guild.id].async) {
-      if (this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].user.id != message.author.id) {
-        return message.reply("It is not your turn.")
-      }
-    }
-
-    if (keeping == "all") {
-      this.client.yatzy[message.guild.id].throwDie(this.client.yatzy[message.guild.id].currentPlayer)
-      return
-    }
-
-    if (keeping == "none") {
-      for (var i = 0; i < this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].die.length; i++) {
-        this.client.yatzy[message.guild.id].players[this.client.yatzy[message.guild.id].currentPlayer].die[i] = 0
-      }
-      this.client.yatzy[message.guild.id].throwDie(this.client.yatzy[message.guild.id].currentPlayer)
-      return
+    if (game.players[game.currentPlayer].user.id != message.author.id) {
+      return message.reply("It is not your turn.")
     }
 
     keeping = keeping.split(" ").join("")
@@ -53,6 +41,6 @@ module.exports = class ykeepCommand extends Command {
     for (var i = 0; i < keeping.length; i++) {
       keeping[i] = parseInt(keeping[i])
     }
-    this.client.yatzy[message.guild.id].keepDie(this.client.yatzy[message.guild.id].currentPlayer, keeping)
+    game.keepDie(game.currentPlayer, keeping)
   }
 }

@@ -18,9 +18,9 @@ module.exports = class yatzyCommand extends Command {
       	},
       	{
       		key: "gameType",
-      		prompt: "What kind of yatzy game to play. (mini/normal/maxi/random/maxirandom/chance/yatzy)",
+      		prompt: "What kind of yatzy game to play. (mini/normal/maxi/minirandom/random/maxirandom/chance/yatzy)",
       		type: "string",
-          oneOf: ["mini", "normal", "maxi", "random", "maxirandom", "chance", "yatzy"],
+          oneOf: ["mini", "normal", "maxi", "minirandom", "random", "maxirandom", "chance", "yatzy"],
       	},
       	{
       		key: "forced",
@@ -34,13 +34,14 @@ module.exports = class yatzyCommand extends Command {
   }
 
   async run(message, { displayName, gameType, forced }) {
-    if (this.client.yatzy[message.guild.id]) {
-      if (!this.client.yatzy[message.guild.id].ended) {
-        return message.reply("There is already a game of yatzy started on this server.")
+    if (this.client.yatzy[message.channel.id]) {
+      if (!this.client.yatzy[message.channel.id].ended) {
+        return message.reply("There is already a game of yatzy started in this channel.")
       }
     }
-    this.client.yatzy[message.guild.id] = new yatzy(message.guild, message.channel, gameType.toLowerCase(), forced.toLowerCase() == "forced")
-    this.client.yatzy[message.guild.id].addPlayer(displayName, message.author, true)
+
+    this.client.yatzy[message.channel.id] = new yatzy(message.guild, message.channel, gameType.toLowerCase(), forced.toLowerCase() == "forced")
+    this.client.yatzy[message.channel.id].addPlayer(displayName, message.author, true)
     return message.reply("Started a game of yatzy, with you as the host. Other players use `yjoin` to join. When all players has joined use `ystart` to start the game.")
   }
 }
