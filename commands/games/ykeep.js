@@ -13,7 +13,7 @@ module.exports = class ykeepCommand extends Command {
       		key: "keeping",
       		prompt: "What die to keep. Enter the number of the dice, not the number on the dice. Example (1 (to keep the first dice), 135  (to keep first, third and fifth die), 0 (to keep none))",
       		type: "string",
-          validate: text => /^([\d ]{1,}|all|none)$/gi.test(text)
+          validate: text => /^([\d ]{1,}|all)$/gi.test(text)
       	},
       ]
     });
@@ -34,6 +34,11 @@ module.exports = class ykeepCommand extends Command {
     }
     if (game.players[game.currentPlayer].user.id != message.author.id) {
       return message.reply("It is not your turn.")
+    }
+
+    if (keeping == "all") {
+      game.throwDie(game.currentPlayer)
+      return
     }
 
     keeping = keeping.split(" ").join("")

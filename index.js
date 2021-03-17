@@ -46,3 +46,4 @@ client.on("message", async msg => {
 client.login(tokens.utilToken);
 
 client.yatzy = {}
+client.radio = {}
