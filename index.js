@@ -39,6 +39,7 @@ client.on("message", async msg => {
       msg.delete()
     }
   }
+
   //console.log(msg.content);
 });
 
