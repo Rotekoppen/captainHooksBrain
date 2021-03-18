@@ -11,22 +11,21 @@ function Song(type, url, name, thumbnail, requester, radio = false) {
   this.radio = radio //false
 }
 
-// regex test for youtube links /^(http(s{0,1}):\/\/){0,1}(www\.){0,1}youtu(be\.com|\.be).*/
-// regex test for links in general /^(http(s{0,1}):\/\/).*/
-
 module.exports = function(guild, text, voice) {
   this.addSong = async function (query, requester) {
     let song = undefined
+    let playlist = 0
     if (/^(http(s{0,1}):\/\/){0,1}(www\.){0,1}youtu(be\.com|\.be)\/playlist\?list=.*/g.test(query)){
       const results = await yts({ listId: query.replace(/^(http(s{0,1}):\/\/){0,1}(www\.){0,1}youtu(be\.com|\.be)\/playlist\?list=/g, "") })
       results.videos.forEach((video, i) => {
         song = new Song("yt", "https://www.youtube.com/watch?v=" + video.videoId, video.title, video.thumbnail, requester)
         this.queue.push(song)
       });
+      playlist = results.videos.length
 
     } else if (/^(http(s{0,1}):\/\/){0,1}(www\.){0,1}youtu(be\.com|\.be).*/g.test(query)) {
       const metadata = await ytdl.getBasicInfo(query)
-      song = new Song("yt", query, metadata.videoDetails.title, metadata.videoDetails.thumbnails.pop(), requester)
+      song = new Song("yt", query, metadata.videoDetails.title, metadata.videoDetails.thumbnails.pop().url, requester)
       this.queue.push(song)
 
     } else if (/^(http(s{0,1}):\/\/).*/g.test(query)) {
@@ -44,11 +43,16 @@ module.exports = function(guild, text, voice) {
     const embed = new MessageEmbed()
     	.setColor("#8899dd")
       .setTitle("Added to queue")
-      .setDescription(song.name)
+      .setDescription("[" + song.name + "](" + song.url + ")")
 
-    if (song.thumbnail) {
-      embed.setThumbnail(song.thumbnail)
+    if (playlist != 0) {
+      embed.setDescription(playlist + " song(s)")
+    }else {
+      if (song.thumbnail) {
+        embed.setThumbnail(song.thumbnail)
+      }
     }
+
 
     if (!this.playing) {
       this.playnext()
@@ -65,11 +69,16 @@ module.exports = function(guild, text, voice) {
 
   this.playnext = async function () {
     if (this.queue.length == 0) {
-
+      this.playing = false
       return
     }
+    let song = this.queue.shift()
+    this.history.push(song)
+    await this.play(song)
+  }
 
-    this.current = this.queue.shift()
+  this.play = async function(song) {
+    this.current = song
     this.playing = true
     if (this.current.type == "yt") {
       this.dispatcher = this.connection.play(await ytdl(this.current.url), { type: 'opus' })
@@ -85,7 +94,6 @@ module.exports = function(guild, text, voice) {
     });
 
     this.dispatcher.on('error', console.error);
-
   }
 
   this.connection = undefined

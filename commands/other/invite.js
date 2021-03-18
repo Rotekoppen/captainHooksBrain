@@ -6,12 +6,12 @@ module.exports = class inviteCommand extends Command {
       name: "invite",
       group: "other",
       memberName: "invite",
-      description: "Add the bot to your own server",
+      description: "Add the bot to your own server.",
     });
   }
 
   async run(message, args) {
-    message.author.dmChannel.send(
+    message.author.send(
       `Add the bot to your server using 'https://discord.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot'`
     );
   }
