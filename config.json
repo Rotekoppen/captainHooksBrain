@@ -9,6 +9,7 @@
     ["pfpfun", "Profile picture fun"],
     ["games", "Games commands"],
     ["fun", "Fun commands"],
+    ["radio", "Radio commands"],
     ["other", "Other commands"]
   ],
   "blockWidth": 20
