@@ -74,6 +74,9 @@ module.exports = function(guild, text, voice) {
     }
     let song = this.queue.shift()
     this.history.push(song)
+    if (this.looping) {
+      this.queue.push(song)
+    }
     await this.play(song)
   }
 
@@ -96,6 +99,7 @@ module.exports = function(guild, text, voice) {
     this.dispatcher.on('error', console.error);
   }
 
+  this.looping = false
   this.connection = undefined
   this.dispatcher = undefined
   this.guild = guild
