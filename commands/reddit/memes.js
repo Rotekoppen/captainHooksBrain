@@ -5,7 +5,7 @@ module.exports = class memeCommand extends Command {
   constructor(client) {
     super(client, {
       name: "meme",
-      group: "reddit",
+      group: "images",
       memberName: "meme",
       description: "Get a random image from r/Memes.",
     });

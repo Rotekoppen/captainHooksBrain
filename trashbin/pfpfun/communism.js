@@ -7,7 +7,7 @@ module.exports = class communismCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: "communism",
-			group: "pfpfun",
+			group: "images",
 			memberName: "communism",
 			description: "Adds a communism symbol to profile picture of @'ted person'.",
 			args: [
@@ -19,7 +19,7 @@ module.exports = class communismCommand extends Command {
 			],
 		});
 	}
-	
+
 	run = async (message, { target }) => {
     const avatarURL = target.displayAvatarURL({ format: "png" })
     if (avatarURL == null) return message.reply("the avatar could not be fetched")

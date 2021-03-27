@@ -6,7 +6,7 @@ module.exports = class germanyCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: "germany",
-			group: "pfpfun",
+			group: "images",
 			memberName: "germany",
 			aliases: ["tyskland", "deutchland"],
 			description: "Adds a german flag to the profile picture of @'ted person'.",

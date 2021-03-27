@@ -5,7 +5,7 @@ module.exports = class coolguideCommand extends Command {
   constructor(client) {
     super(client, {
       name: "coolguide",
-      group: "reddit",
+      group: "images",
       memberName: "coolguide",
       description: "Get a random image from r/CoolGuides.",
     });

@@ -5,7 +5,7 @@ module.exports = class dankCommand extends Command {
   constructor(client) {
     super(client, {
       name: "dank",
-      group: "reddit",
+      group: "images",
       memberName: "dank",
       description: "Get a random image from r/DankMemes.",
     });

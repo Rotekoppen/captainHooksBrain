@@ -5,8 +5,6 @@
   "disableEveryone": true,
   "groups": [
     ["images", "Image commands"],
-    ["reddit", "Reddit commands"],
-    ["pfpfun", "Profile picture fun"],
     ["games", "Games commands"],
     ["fun", "Fun commands"],
     ["radio", "Radio commands"],
