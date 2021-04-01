@@ -40,7 +40,7 @@ client.on("message", async msg => {
     }
   }
 
-  //console.log(msg.content);
+  console.log(msg.content);
 });
 
 client.login(tokens.utilToken);

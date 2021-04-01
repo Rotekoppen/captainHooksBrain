@@ -14,6 +14,7 @@ module.exports = class userinfoCommand extends Command {
 					key: "target",
 					prompt: "User to show info about.",
 					type: "user",
+          default: msg => msg.author,
 				},
 			],
     });

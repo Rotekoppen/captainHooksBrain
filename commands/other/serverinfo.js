@@ -27,9 +27,12 @@ module.exports = class serverinfoCommand extends Command {
     		{ name: 'Roles:', value: guild.roles.cache.array().length, inline: true },
     		{ name: 'Channels:', value: guild.channels.cache.array().length, inline: true },
     		{ name: 'Created:', value: guild.createdAt.toGMTString()},
-        { name: 'Owner:', value: guild.owner.displayName},
     		{ name: 'Bot joined:', value: guild.joinedAt.toGMTString()},
     	)
+
+    if (guild.owner.displayName) {
+      embed.addFields({ name: 'Owner:', value: guild.owner.displayName})
+    }
 
     return message.channel.send(embed)
   }
