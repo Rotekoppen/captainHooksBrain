@@ -9,7 +9,7 @@ module.exports = class uwuCommand extends Command {
       group: "fun",
       memberName: "uwu",
       aliases: ["owo", "uwuify", "owoify"],
-      description: "Say",
+      description: "Say but UwU",
       args: [
 				{
 					key: "uwu",
