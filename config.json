@@ -1,14 +1,18 @@
 {
   "owner": "164420487441547264",
-  "prefix": "c!",
+  "prefix": "..",
   "invite": "https://discord.gg/hwF3gzqGC3",
   "disableEveryone": true,
   "groups": [
     ["images", "Image commands"],
-    ["games", "Games commands"],
+    ["yatzy", "Yatzy commands"],
     ["fun", "Fun commands"],
     ["radio", "Radio commands"],
     ["other", "Other commands"]
   ],
-  "blockWidth": 20
+  "blockWidth": 20,
+  "distube": {
+    "leaveOnEmpty": true,
+    "leaveOnStop": true
+  }
 }

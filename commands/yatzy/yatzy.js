@@ -5,7 +5,7 @@ module.exports = class yatzyCommand extends Command {
   constructor(client) {
     super(client, {
       name: "yatzy",
-      group: "games",
+      group: "yatzy",
       memberName: "yatzy",
       guildOnly: true,
       description: "Starts a game of yatzy.",

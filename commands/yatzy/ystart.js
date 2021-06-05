@@ -3,7 +3,7 @@ module.exports = class ystartCommand extends Command {
   constructor(client) {
     super(client, {
       name: "ystart",
-      group: "games",
+      group: "yatzy",
       guildOnly: true,
       memberName: "ystart",
       description: "Starts the game of yatzy.",

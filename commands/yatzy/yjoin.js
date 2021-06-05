@@ -4,7 +4,7 @@ module.exports = class yjoinCommand extends Command {
   constructor(client) {
     super(client, {
       name: "yjoin",
-      group: "games",
+      group: "yatzy",
       guildOnly: true,
       memberName: "yjoin",
       description: "Joins a game of yatzy.",

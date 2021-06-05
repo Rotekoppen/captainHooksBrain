@@ -3,12 +3,12 @@ const { Command } = require("discord.js-commando");
 module.exports = class playCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "play",
+      name: "playtop",
       group: "radio",
       guildOnly: true,
-      aliases: ["p"],
-      memberName: "play",
-      description: "Play a youtube video in a voice channel.",
+      aliases: ["pt"],
+      memberName: "playtop",
+      description: "Adds a song to the start of the queue.",
       args: [
       	{
       		key: "query",
@@ -20,6 +20,6 @@ module.exports = class playCommand extends Command {
   }
 
   async run(message, { query }) {
-    this.client.distube.play(message, query)
+    this.client.distube.play(message, query, true)
   }
 }

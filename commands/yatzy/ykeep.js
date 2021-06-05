@@ -3,7 +3,7 @@ module.exports = class ykeepCommand extends Command {
   constructor(client) {
     super(client, {
       name: "ykeep",
-      group: "games",
+      group: "yatzy",
       guildOnly: true,
       aliases: ["yk"],
       memberName: "ykeep",
