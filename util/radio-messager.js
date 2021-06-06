@@ -35,7 +35,7 @@ module.exports = function(color) {
       message.channel.send(new MessageEmbed()
       .setTitle(`Added playlist ${playlist.name} to queue (${playlist.songs.length} songs)`)
       .setColor(color)
-      .setFooter('Requested by ' + playlist.user.username, song.user.displayAvatarURL({size: 64}))
+      .setFooter('Requested by ' + playlist.user.username, playlist.user.displayAvatarURL({size: 64}))
     )})
 
     return distube
